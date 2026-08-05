@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Flashcards</title>
+    <link rel="stylesheet" href="flashcard.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Flashcards</h1>
+            <p>Build a study deck and flip cards with the same polished style.</p>
+        </header>
+
+        <section class="card">
+            <h2>Add New Flashcard</h2>
+            <form id="flashcard-form">
+                <div class="form-group">
+                    <label for="question">Question *</label>
+                    <textarea id="question" rows="4" placeholder="Type the question here" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="answer">Answer *</label>
+                    <textarea id="answer" rows="4" placeholder="Type the answer here" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Flashcard</button>
+                    <button type="button" id="clear-btn" class="btn btn-secondary">Clear</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="card flashcard-panel">
+            <div class="flashcard-viewer">
+                <div class="flashcard" id="active-card">
+                    <div class="flashcard-face flashcard-front" id="card-front">
+                        <h3>Question</h3>
+                        <p>Use the form above to create your first flashcard.</p>
+                    </div>
+                    <div class="flashcard-face flashcard-back" id="card-back">
+                        <h3>Answer</h3>
+                        <p>Then flip the card to check your answer.</p>
+                    </div>
+                </div>
+
+                <div class="flashcard-controls">
+                    <button type="button" class="btn btn-secondary" id="prev-btn">Previous</button>
+                    <button type="button" class="btn btn-primary" id="flip-btn">Flip</button>
+                    <button type="button" class="btn btn-secondary" id="next-btn">Next</button>
+                </div>
+            </div>
+
+            <div class="flashcard-list">
+                <h3>Saved Cards</h3>
+                <ul id="card-list"></ul>
+                <div id="empty-state" class="empty-state">No flashcards saved yet.</div>
+            </div>
+        </section>
+    </div>
+
+    <script src="flashcard.js"></script>
+</body>
+</html>
