@@ -179,3 +179,96 @@ function escapeHTML(str) {
         '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
     }[tag] || tag));
 }
+
+// Append this at the bottom of script.js
+
+const chatToggleBtn = document.getElementById('chat-toggle-btn');
+const chatCloseBtn = document.getElementById('chat-close-btn');
+const chatWindow = document.getElementById('chat-window');
+const chatInput = document.getElementById('chat-input');
+const chatMessages = document.getElementById('chat-messages');
+
+chatToggleBtn.addEventListener('click', () => chatWindow.classList.toggle('hidden'));
+chatCloseBtn.addEventListener('click', () => chatWindow.classList.add('hidden'));
+
+function handleChatKeyPress(e) {
+    if (e.key === 'Enter') sendChatMessage();
+}
+
+function handleChipClick(text) {
+    chatInput.value = text;
+    sendChatMessage();
+}
+
+function sendChatMessage() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+
+    appendMessage(text, 'user-message');
+    chatInput.value = '';
+
+    setTimeout(() => {
+        const botReply = getBotResponse(text);
+        appendMessage(botReply, 'bot-message');
+    }, 400);
+}
+
+function appendMessage(text, className) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `message ${className}`;
+    msgDiv.innerHTML = text;
+    chatMessages.appendChild(msgDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function getBotResponse(query) {
+    const q = query.toLowerCase();
+
+    if (q.includes('pending') || q.includes('due') || q.includes('how many tasks')) {
+        const pendingList = tasks.filter(t => !t.completed);
+        if (pendingList.length === 0) {
+            return "🎉 You have no pending tasks! Great job staying on top of your work.";
+        }
+        const taskTitles = pendingList.map(t => `• <b>${escapeHTML(t.title)}</b> (Due: ${t.dueDate})`).join('<br>');
+        return `You have <b>${pendingList.length}</b> pending task(s):<br>${taskTitles}`;
+    }
+
+    if (q.includes('completed') || q.includes('done')) {
+        const completedCount = tasks.filter(t => t.completed).length;
+        return `You have completed <b>${completedCount}</b> task(s) so far. Keep it up!`;
+    }
+
+    if (q.includes('high priority') || q.includes('urgent')) {
+        const highPriority = tasks.filter(t => !t.completed && t.priority === 'High');
+        if (highPriority.length === 0) return "You don't have any high-priority tasks pending!";
+        const titles = highPriority.map(t => `• ${escapeHTML(t.title)}`).join('<br>');
+        return `⚠️ <b>High Priority Tasks:</b><br>${titles}`;
+    }
+
+    if (q.includes('add') || q.includes('create') || q.includes('new task')) {
+        return "To add a task, fill out the <b>Task Title</b> and <b>Due Date</b> in the form at the top and click <b>Add Task</b>.";
+    }
+
+    if (q.includes('edit') || q.includes('change')) {
+        return "Click the yellow <b>Pencil icon</b> on any task card to edit its details.";
+    }
+
+    if (q.includes('delete') || q.includes('remove')) {
+        return "Click the red <b>Trash icon</b> next to a task to delete it permanently.";
+    }
+
+    if (q.includes('tip') || q.includes('study') || q.includes('productivity')) {
+        const tips = [
+            "💡 <b>Pomodoro Technique:</b> Work for 25 minutes, then take a 5-minute break.",
+            "💡 <b>Eat the Frog:</b> Tackle your highest-priority tasks first thing in the morning.",
+            "💡 <b>Time Blocking:</b> Assign specific time slots on your calendar for each task."
+        ];
+        return tips[Math.floor(Math.random() * tips.length)];
+    }
+
+    if (q.includes('hello') || q.includes('hi') || q.includes('hey')) {
+        return "Hello! How can I assist you with your workload today?";
+    }
+
+    return "I'm not sure about that. Try asking:<br>• <i>What are my pending tasks?</i><br>• <i>Show high priority tasks</i><br>• <i>Give me a study tip</i>";
+}
