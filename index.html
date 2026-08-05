@@ -1,42 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Management System</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task Management System</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>Student Task Management System</h1>
+            <p>Organize, manage, and track your academic tasks efficiently.</p>
+        </header>
 
-<div class="container">
-    <h1>Student Management System</h1>
+        <!-- Task Form -->
+        <section class="card">
+            <h2 id="form-title">Add New Task</h2>
+            <form id="task-form">
+                <input type="hidden" id="task-id">
+                
+                <div class="form-group">
+                    <label for="task-title">Task Title *</label>
+                    <input type="text" id="task-title" placeholder="e.g., Complete Math Homework" required>
+                </div>
 
-    <div class="form">
-        <input type="text" id="name" placeholder="Student Name">
-        <input type="number" id="age" placeholder="Age">
-        <input type="text" id="course" placeholder="Course">
-        <button onclick="addStudent()">Save Student</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="task-priority">Priority</label>
+                        <select id="task-priority">
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-due-date">Due Date *</label>
+                        <input type="date" id="task-due-date" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="submit-btn" class="btn btn-primary">Add Task</button>
+                    <button type="button" id="cancel-btn" class="btn btn-secondary" style="display: none;">Cancel</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Controls: Search & Filter -->
+        <section class="controls">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search tasks by title...">
+            </div>
+            <div class="filter-box">
+                <button class="filter-btn active" data-filter="All">All</button>
+                <button class="filter-btn" data-filter="Pending">Pending</button>
+                <button class="filter-btn" data-filter="Completed">Completed</button>
+            </div>
+        </section>
+
+        <!-- Task List -->
+        <section class="task-list-container">
+            <h2>Your Tasks</h2>
+            <ul id="task-list" class="task-list"></ul>
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <p>No tasks found.</p>
+            </div>
+        </section>
     </div>
 
-    <input type="text" id="search" placeholder="Search Student..." onkeyup="searchStudent()">
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Course</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-
-        <tbody id="studentTable"></tbody>
-    </table>
-
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
-</html>
+</html>s
