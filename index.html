@@ -3,72 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Advance Student Task Management System</title>
+    <title>Student Task Dashboard</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Student Task Management System</h1>
-            <p>Organize, manage, and track your academic tasks efficiently.</p>
-        </header>
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h2>TaskSpace</h2>
+            </div>
 
-        <!-- Task Form -->
-        <section class="card">
-            <h2 id="form-title">Add New Task</h2>
-            <form id="task-form">
-                <input type="hidden" id="task-id">
+            <nav class="nav-menu">
+                <p class="menu-label">Menu</p>
+                <ul>
+                    <li class="active" data-filter="All">
+                        <a href="#"><i class="fa-solid fa-list-check"></i> All Tasks</a>
+                    </li>
+                    <li data-filter="Pending">
+                        <a href="#"><i class="fa-solid fa-clock"></i> Pending</a>
+                    </li>
+                    <li data-filter="Completed">
+                        <a href="#"><i class="fa-solid fa-circle-check"></i> Completed</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Stats Overview Card -->
+            <div class="sidebar-stats">
+                <p class="menu-label">Overview</p>
+                <div class="stat-card">
+                    <span class="stat-title">Pending</span>
+                    <span class="stat-value" id="stat-pending">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-title">Completed</span>
+                    <span class="stat-value" id="stat-completed">0</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header & Search -->
+            <header class="top-header">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="Search tasks by title...">
+                </div>
+            </header>
+
+            <!-- Task Form Card -->
+            <section class="card form-card">
+                <h2 id="form-title">Create New Task</h2>
+                <form id="task-form">
+                    <input type="hidden" id="task-id">
+                    
+                    <div class="form-group">
+                        <label for="task-title">Task Title *</label>
+                        <input type="text" id="task-title" placeholder="e.g., Submit Database Assignment" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-priority">Priority</label>
+                            <select id="task-priority">
+                                <option value="Low">Low Priority</option>
+                                <option value="Medium" selected>Medium Priority</option>
+                                <option value="High">High Priority</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="task-due-date">Due Date *</label>
+                            <input type="date" id="task-due-date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="submit-btn" class="btn btn-primary">
+                            <i class="fa-solid fa-plus"></i> Add Task
+                        </button>
+                        <button type="button" id="cancel-btn" class="btn btn-secondary" style="display: none;">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Tasks List Container -->
+            <section class="task-list-section">
+                <div class="section-header">
+                    <h2 id="view-title">All Tasks</h2>
+                </div>
+
+                <ul id="task-list" class="task-list"></ul>
                 
-                <div class="form-group">
-                    <label for="task-title">Task Title *</label>
-                    <input type="text" id="task-title" placeholder="e.g., Complete Math Homework" required>
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <i class="fa-solid fa-folder-open empty-icon"></i>
+                    <p>No tasks found in this view.</p>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="task-priority">Priority</label>
-                        <select id="task-priority">
-                            <option value="Low">Low</option>
-                            <option value="Medium" selected>Medium</option>
-                            <option value="High">High</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="task-due-date">Due Date *</label>
-                        <input type="date" id="task-due-date" required>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" id="submit-btn" class="btn btn-primary">Add Task</button>
-                    <button type="button" id="cancel-btn" class="btn btn-secondary" style="display: none;">Cancel</button>
-                </div>
-            </form>
-        </section>
-
-        <!-- Controls: Search & Filter -->
-        <section class="controls">
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="Search tasks by title...">
-            </div>
-            <div class="filter-box">
-                <button class="filter-btn active" data-filter="All">All</button>
-                <button class="filter-btn" data-filter="Pending">Pending</button>
-                <button class="filter-btn" data-filter="Completed">Completed</button>
-            </div>
-        </section>
-
-        <!-- Task List -->
-        <section class="task-list-container">
-            <h2>Your Tasks</h2>
-            <ul id="task-list" class="task-list"></ul>
-            <div id="empty-state" class="empty-state" style="display: none;">
-                <p>No tasks found.</p>
-            </div>
-        </section>
+            </section>
+        </main>
     </div>
 
     <script src="script.js"></script>
 </body>
-</html>s
+</html>
