@@ -438,18 +438,31 @@ body {
     margin-top: 6px;
 }
 
-.chip {
-    background-color: var(--primary-light);
-    color: var(--primary);
-    border: none;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
+/* Mobile Responsive */
+@media (max-width: 640px) {
+    .form-row, .controls {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+    
+    .filter-box {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .filter-btn {
+        flex: 1;
+    }
+
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
 }
 
-.chip:hover {
-    background-color: #c7d2fe;
-}
