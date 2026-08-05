@@ -20,6 +20,13 @@ const viewTitle = document.getElementById('view-title');
 
 const statPending = document.getElementById('stat-pending');
 const statCompleted = document.getElementById('stat-completed');
+// Analytics DOM Targets
+const analyticsTotal = document.getElementById('analytics-total');
+const analyticsPending = document.getElementById('analytics-pending');
+const analyticsCompleted = document.getElementById('analytics-completed');
+const analyticsHigh = document.getElementById('analytics-high');
+const completionPercent = document.getElementById('completion-percent');
+const progressBar = document.getElementById('progress-bar');
 
 document.addEventListener('DOMContentLoaded', () => {
     loadTasks();
@@ -46,6 +53,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function updateAnalytics() {
+
+    const total = tasks.length;
+
+    const completed = tasks.filter(
+        task => task.completed
+    ).length;
+
+
+    const pending = total - completed;
+
+
+    const highPriority = tasks.filter(
+        task => task.priority === "High"
+    ).length;
+
+
+    const percentage = total === 0 
+        ? 0 
+        : Math.round((completed / total) * 100);
+
+
+    analyticsTotal.textContent = total;
+
+    analyticsPending.textContent = pending;
+
+    analyticsCompleted.textContent = completed;
+
+    analyticsHigh.textContent = highPriority;
+
+
+    completionPercent.textContent = percentage + "%";
+
+    progressBar.style.width = percentage + "%";
+}
+
 function loadTasks() {
     const stored = localStorage.getItem('student_tasks_dashboard');
     tasks = stored ? JSON.parse(stored) : [];
@@ -65,6 +108,7 @@ function updateStats() {
 
 function render() {
     updateStats();
+    updateAnalytics();
     taskList.innerHTML = '';
 
     const filtered = tasks.filter(task => {
