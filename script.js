@@ -180,28 +180,39 @@ function escapeHTML(str) {
     }[tag] || tag));
 }
 
-// Append this at the bottom of script.js
+// ==========================================
+// Fail-safe Chatbot Logic
+// ==========================================
 
-const chatToggleBtn = document.getElementById('chat-toggle-btn');
-const chatCloseBtn = document.getElementById('chat-close-btn');
-const chatWindow = document.getElementById('chat-window');
-const chatInput = document.getElementById('chat-input');
-const chatMessages = document.getElementById('chat-messages');
+function toggleChat() {
+    const chatWindow = document.getElementById('chat-window');
+    if (chatWindow) {
+        chatWindow.classList.toggle('hidden');
+    }
+}
 
-chatToggleBtn.addEventListener('click', () => chatWindow.classList.toggle('hidden'));
-chatCloseBtn.addEventListener('click', () => chatWindow.classList.add('hidden'));
+function closeChat() {
+    const chatWindow = document.getElementById('chat-window');
+    if (chatWindow) {
+        chatWindow.classList.add('hidden');
+    }
+}
 
 function handleChatKeyPress(e) {
     if (e.key === 'Enter') sendChatMessage();
 }
 
 function handleChipClick(text) {
-    chatInput.value = text;
-    sendChatMessage();
+    const chatInput = document.getElementById('chat-input');
+    if (chatInput) {
+        chatInput.value = text;
+        sendChatMessage();
+    }
 }
 
 function sendChatMessage() {
-    const text = chatInput.value.trim();
+    const chatInput = document.getElementById('chat-input');
+    const text = chatInput ? chatInput.value.trim() : '';
     if (!text) return;
 
     appendMessage(text, 'user-message');
@@ -214,6 +225,9 @@ function sendChatMessage() {
 }
 
 function appendMessage(text, className) {
+    const chatMessages = document.getElementById('chat-messages');
+    if (!chatMessages) return;
+    
     const msgDiv = document.createElement('div');
     msgDiv.className = `message ${className}`;
     msgDiv.innerHTML = text;
