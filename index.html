@@ -91,6 +91,68 @@
                     </div>
                 </form>
             </section>
+            
+            <!-- Analytics Dashboard -->
+<section class="analytics-section">
+
+    <div class="section-header">
+        <h2>📊 Task Analytics</h2>
+    </div>
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card total-card">
+            <i class="fa-solid fa-list-check"></i>
+            <div>
+                <p>Total Tasks</p>
+                <h3 id="analytics-total">0</h3>
+            </div>
+        </div>
+
+
+        <div class="analytics-card pending-card">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+                <p>Pending Tasks</p>
+                <h3 id="analytics-pending">0</h3>
+            </div>
+        </div>
+
+
+        <div class="analytics-card completed-card">
+            <i class="fa-solid fa-circle-check"></i>
+            <div>
+                <p>Completed Tasks</p>
+                <h3 id="analytics-completed">0</h3>
+            </div>
+        </div>
+
+
+        <div class="analytics-card priority-card">
+            <i class="fa-solid fa-flag"></i>
+            <div>
+                <p>High Priority</p>
+                <h3 id="analytics-high">0</h3>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="completion-box">
+
+        <div class="completion-header">
+            <span>Completion Progress</span>
+            <span id="completion-percent">0%</span>
+        </div>
+
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+    </div>
+
+</section>
 
             <!-- Tasks List Container -->
             <section class="task-list-section">
