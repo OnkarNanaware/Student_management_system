@@ -14,6 +14,8 @@ A sleek, responsive, and lightweight web application built with HTML5, CSS3, and
 - 💾 **Persistent Storage:** All data is saved automatically in browser `LocalStorage`.
 - 📱 **Fully Responsive:** Optimized for desktops, tablets, and mobile devices.
 - 🎨 **Modern UI:** Glassmorphism styling, clean typography, and interactive micro-animations.
+- 🎨 **Modern analytics**
+- 🎨 **Ai chatbot**
 
 ---
 
