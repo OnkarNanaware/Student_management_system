@@ -6,25 +6,43 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code...'
+                checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building project...'
+                echo 'Building application...'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
+                sh 'mvn test'
             }
         }
-        stage('deploy')
-        {
-            steps{
-                echo 'Deploed succesfully on the Docker container...'
+
+        stage('Package') {
+            steps {
+                echo 'Packaging application...'
+                sh 'mvn package'
             }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Pipeline completed successfully!'
+        }
+
+        failure {
+            echo '❌ Pipeline failed!'
+        }
+
+        always {
+            echo 'Pipeline finished.'
         }
     }
 }
