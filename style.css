@@ -621,3 +621,10 @@ body {
     }
 
 }
+
+/* Focus Timer specific styles */
+.timer-mode-btn.active {
+    background-color: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}

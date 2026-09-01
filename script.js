@@ -28,6 +28,10 @@ const analyticsHigh = document.getElementById('analytics-high');
 const completionPercent = document.getElementById('completion-percent');
 const progressBar = document.getElementById('progress-bar');
 
+// Views DOM Targets
+const tasksView = document.getElementById('tasks-view');
+const timerView = document.getElementById('timer-view');
+
 document.addEventListener('DOMContentLoaded', () => {
     loadTasks();
     render();
@@ -46,9 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
             navItems.forEach(li => li.classList.remove('active'));
             item.classList.add('active');
             
-            currentFilter = item.dataset.filter;
-            viewTitle.textContent = `${currentFilter} Tasks`;
-            render();
+            const view = item.dataset.view;
+            if (view === 'timer') {
+                tasksView.style.display = 'none';
+                timerView.style.display = 'block';
+            } else {
+                tasksView.style.display = 'block';
+                timerView.style.display = 'none';
+                
+                currentFilter = item.dataset.filter;
+                viewTitle.textContent = `${currentFilter} Tasks`;
+                render();
+            }
         });
     });
 });
@@ -329,4 +342,69 @@ function getBotResponse(query) {
     }
 
     return "I'm not sure about that. Try asking:<br>• <i>What are my pending tasks?</i><br>• <i>Show high priority tasks</i><br>• <i>Give me a study tip</i>";
+}
+
+// ==========================================
+// Focus Timer Logic
+// ==========================================
+
+let timerInterval;
+let timerTimeLeft = 25 * 60;
+let isTimerRunning = false;
+let currentTimerMode = 25; // in minutes
+
+const timerDisplay = document.getElementById('timer-display');
+const timerStartBtn = document.getElementById('timer-start');
+const timerPauseBtn = document.getElementById('timer-pause');
+const timerResetBtn = document.getElementById('timer-reset');
+const timerModeBtns = document.querySelectorAll('.timer-mode-btn');
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(timerTimeLeft / 60);
+    const seconds = timerTimeLeft % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+if (timerStartBtn) {
+    timerStartBtn.addEventListener('click', () => {
+        if (!isTimerRunning) {
+            isTimerRunning = true;
+            timerInterval = setInterval(() => {
+                if (timerTimeLeft > 0) {
+                    timerTimeLeft--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    isTimerRunning = false;
+                    alert("Time's up!");
+                }
+            }, 1000);
+        }
+    });
+
+    timerPauseBtn.addEventListener('click', () => {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+    });
+
+    timerResetBtn.addEventListener('click', () => {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        timerTimeLeft = currentTimerMode * 60;
+        updateTimerDisplay();
+    });
+
+    timerModeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            timerModeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            currentTimerMode = parseInt(btn.dataset.time);
+            timerTimeLeft = currentTimerMode * 60;
+            updateTimerDisplay();
+            
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+        });
+    });
 }
