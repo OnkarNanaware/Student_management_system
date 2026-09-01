@@ -21,14 +21,17 @@
             <nav class="nav-menu">
                 <p class="menu-label">Menu</p>
                 <ul>
-                    <li class="active" data-filter="All">
+                    <li class="active" data-filter="All" data-view="tasks">
                         <a href="#"><i class="fa-solid fa-list-check"></i> All Tasks</a>
                     </li>
-                    <li data-filter="Pending">
+                    <li data-filter="Pending" data-view="tasks">
                         <a href="#"><i class="fa-solid fa-clock"></i> Pending</a>
                     </li>
-                    <li data-filter="Completed">
+                    <li data-filter="Completed" data-view="tasks">
                         <a href="#"><i class="fa-solid fa-circle-check"></i> Completed</a>
+                    </li>
+                    <li data-view="timer">
+                        <a href="#"><i class="fa-solid fa-stopwatch"></i> Focus Timer</a>
                     </li>
                 </ul>
             </nav>
@@ -57,9 +60,11 @@
                 </div>
             </header>
 
-            <!-- Task Form Card -->
-            <section class="card form-card">
-                <h2 id="form-title">Create New Task</h2>
+            <!-- Views Container -->
+            <div id="tasks-view">
+                <!-- Task Form Card -->
+                <section class="card form-card">
+                    <h2 id="form-title">Create New Task</h2>
                 <form id="task-form">
                     <input type="hidden" id="task-id">
                     
@@ -216,6 +221,27 @@
                     <p>No tasks found in this view.</p>
                 </div>
             </section>
+            </div> <!-- End tasks-view -->
+
+            <!-- Focus Timer View -->
+            <div id="timer-view" style="display: none;">
+                <section class="card">
+                    <h2><i class="fa-solid fa-stopwatch"></i> Focus Timer</h2>
+                    <div class="timer-container" style="text-align: center; padding: 40px 20px;">
+                        <div id="timer-display" style="font-size: 6rem; font-weight: bold; margin-bottom: 30px; color: var(--primary); font-variant-numeric: tabular-nums;">25:00</div>
+                        <div class="timer-controls" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 30px;">
+                            <button id="timer-start" class="btn btn-primary" style="font-size: 1.2rem; padding: 10px 24px;"><i class="fa-solid fa-play"></i> Start</button>
+                            <button id="timer-pause" class="btn btn-secondary" style="font-size: 1.2rem; padding: 10px 24px;"><i class="fa-solid fa-pause"></i> Pause</button>
+                            <button id="timer-reset" class="btn btn-danger" style="font-size: 1.2rem; padding: 10px 24px;"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+                        </div>
+                        <div class="timer-modes" style="display: flex; gap: 10px; justify-content: center;">
+                            <button class="btn btn-secondary timer-mode-btn active" data-time="25">Pomodoro (25m)</button>
+                            <button class="btn btn-secondary timer-mode-btn" data-time="5">Short Break (5m)</button>
+                            <button class="btn btn-secondary timer-mode-btn" data-time="15">Long Break (15m)</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </main>
     </div>
 
