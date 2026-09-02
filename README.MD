@@ -3,7 +3,7 @@
 A sleek, responsive, and lightweight web application built with HTML5, CSS3, and JavaScript (ES6+). Designed to help students organize, manage, and track their academic tasks, assignments, and deadlines with ease.
 
 ---
-
+new changes added in readme
 ## ✨ Features
 
 - 📝 **CRUD Operations:** Create, Read, Update, and Delete academic tasks effortlessly.
