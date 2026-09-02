@@ -19,20 +19,4 @@ A sleek, responsive, and lightweight web application built with HTML5, CSS3, and
 
 ---
 
-## 🛠️ Technologies Used
-
-- **HTML5:** Semantic markup and structure
-- **CSS3:** Custom properties (CSS variables), Flexbox, CSS Grid, Glassmorphism, and responsive design
-- **JavaScript (ES6+):** DOM manipulation, event handling, and LocalStorage integration
-
----
-
-## 📁 Project Structure
-
-```text
-Student-Task-Management-System/
-│
-├── index.html     # HTML structure and markup
-├── style.css      # Custom styling, modern UI design, and layout
-├── script.js     # Task management logic and LocalStorage handler
-└── README.md      # Project documentation
+this is the demo changes made for the evluation 
