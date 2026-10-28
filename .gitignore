@@ -1,0 +1,11 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+complaints.db
+.env
+.vscode/
+.idea/
+# Kubernetes dependency cloned locally
+kube-state-metrics/

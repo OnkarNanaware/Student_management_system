@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Smart Campus Services</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="container">
+
+        <div>
+
+            <h1>Smart Campus</h1>
+
+            <p>
+                Complaint & Service Management System
+            </p>
+
+        </div>
+
+        <div class="devops-badge">
+            DEVOPS READY
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <span
+                class="stat-number"
+                id="totalComplaints"
+            >
+                0
+            </span>
+
+            <span>
+                Total Complaints
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span
+                class="stat-number"
+                id="openComplaints"
+            >
+                0
+            </span>
+
+            <span>
+                Open Complaints
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span class="stat-number healthy">
+                ●
+            </span>
+
+            <span>
+                System Healthy
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Submit a Complaint</h2>
+
+        <form id="complaintForm">
+
+            <label>
+                Student Name
+            </label>
+
+            <input
+                id="student_name"
+                type="text"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <label>
+                Category
+            </label>
+
+            <select id="category">
+
+                <option>Wi-Fi</option>
+                <option>Computer</option>
+                <option>Projector</option>
+                <option>Electricity</option>
+                <option>Water</option>
+                <option>Classroom</option>
+                <option>Other</option>
+
+            </select>
+
+
+            <label>
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="Describe the problem..."
+                required
+            ></textarea>
+
+
+            <button type="submit">
+                Submit Complaint
+            </button>
+
+        </form>
+
+        <div id="message"></div>
+
+    </section>
+
+
+    <section class="card">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    Recent Complaints
+                </h2>
+
+                <p class="muted">
+                    Live data from Flask REST API
+                </p>
+
+            </div>
+
+            <button
+                onclick="loadComplaints()"
+                class="refresh"
+            >
+                Refresh
+            </button>
+
+        </div>
+
+        <div id="complaints">
+            Loading...
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>
+            DevOps Pipeline
+        </h2>
+
+        <div class="architecture">
+
+            <span>Git</span>
+
+            <b>→</b>
+
+            <span>GitHub Actions</span>
+
+            <b>→</b>
+
+            <span>Docker</span>
+
+            <b>→</b>
+
+            <span>Kubernetes</span>
+
+            <b>→</b>
+
+            <span>Prometheus</span>
+
+            <b>→</b>
+
+            <span>Grafana</span>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    Smart Campus DevOps Demonstration
+
+</footer>
+
+
+<script src="/static/app.js"></script>
+
+</body>
+
+</html>
