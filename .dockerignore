@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .git
 .gitignore
 README.md
@@ -5,4 +6,14 @@ README.MD
 Dockerfile
 .dockerignore
 Jenkinsfile
+
+=======
+__pycache__
+*.pyc
+.pytest_cache
+.git
+.venv
+venv
+complaints.db
+>>>>>>> om
 

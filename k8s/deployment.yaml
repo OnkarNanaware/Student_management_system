@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: campus-app
+
+spec:
+
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: campus-app
+
+  template:
+
+    metadata:
+      labels:
+        app: campus-app
+
+    spec:
+
+      containers:
+
+        - name: campus-app
+
+          image: harshad
+
+          imagePullPolicy: Never
+
+          ports:
+
+            - containerPort: 5000
+
+          resources:
+
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
