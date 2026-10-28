@@ -408,3 +408,51 @@ if (timerStartBtn) {
         });
     });
 }
+// ==========================================
+// Automated Testing Exports
+// ==========================================
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        updateAnalytics,
+        saveTasks,
+        updateStats,
+        escapeHTML,
+        getBotResponse,
+
+        // Reset tasks between tests
+        resetTasksForTest: function () {
+            tasks = [];
+            localStorage.removeItem('student_tasks_dashboard');
+        },
+
+        // Add task for automated testing
+        addTaskForTest: function (title, priority, dueDate) {
+            const task = {
+                id: Date.now().toString(),
+                title,
+                priority,
+                dueDate,
+                completed: false
+            };
+
+            tasks.push(task);
+            saveTasks();
+
+            return task;
+        },
+
+        // Complete a task for testing
+        completeTaskForTest: function (id) {
+            tasks = tasks.map(task =>
+                task.id === id
+                    ? { ...task, completed: true }
+                    : task
+            );
+
+            saveTasks();
+
+            return tasks.find(task => task.id === id);
+        }
+    };
+}
